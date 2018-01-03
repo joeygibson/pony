@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Shared lib
+# gcc -fPIC -shared -o libcbffi.so ffi/cbffi.c
+
+# Static lib
+gcc -c -o libcbffi.o ffi/cbffi.c
+ar -q libcbffi.a libcbffi.o
+
+ponyc --path=. ffi
+
