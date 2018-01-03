@@ -22,4 +22,14 @@ actor Main
 
         env.out.print("Res1: " + res1)
 
+    // more matching
+    let a: U64 = 2
+    let b: U64 = 1
+
+    env.out.print(match (a, b)
+        | (0, _) => "a is zero, so who cares about b"
+        | if a > b => "a is bigger than b"
+        | if a < b => "b is bigger than a"
+      else "they are greater than zero, and the same"
+    end)
 
