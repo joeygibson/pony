@@ -46,8 +46,8 @@ actor Main
 
         let x = "Hello, World! 2"
 
-        gen_event.push("Hello, World!")
-        gen_event.push("Second line!")
-        gen_event.push("Third line!")
+        gen_event.>push("Hello, World!")
+            .>push("Second line!")
+            .push("Third line!")
 
         
