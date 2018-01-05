@@ -10,15 +10,27 @@
 //     fun bar[B: Stringable val](a: B): String =>
 //         a.string()
 
-class Foo[A]
+// This one supports `iso`
+// class Foo[A]
+//     var _c: A
+
+//     new create(c: A) =>
+//         _c = consume c
+
+//     fun get(): this->A => _c
+//     // fun get(): A => _c    // this one fails for `iso`
+
+//     fun ref set(c: A) => _c = consume c
+
+class Foo[A: Any #read]
     var _c: A
 
     new create(c: A) =>
-        _c = consume c
+        _c = c
 
-    fun get(): this->A => _c
+    fun ref get(): A => _c
 
-    fun ref set(c: A) => _c = consume c
+    fun ref set(c: A) => _c = c
 
 actor Main
     new create(env: Env) =>
@@ -26,8 +38,8 @@ actor Main
 
         env.out.print(a.get().string())
         a.set(21)
-
         env.out.print(a.get().string())
+
         let b = Foo[F32](1.5)
         env.out.print(b.get().string())
 
